@@ -4,6 +4,7 @@ const path = require('path');
 const http = require('http');
 const express = require('express');
 const socketIO = require('socket.io');
+const { generateMessage } = require('./utils/message');
 const port = process.env.PORT || 3000;
 const publicPath = path.join(__dirname, '../public/');
 const app = express();
@@ -25,18 +26,18 @@ io.on('connection', (socket) => {
     console.log('New user connected ...');
 
     //socket.broadcast.emit from Admin text Welcome to chattrbox
-    socket.emit('newMessage', {
-        from: 'Admin',
-        text: 'welcome to chattrbox!',
-        createdAt: new Date().getTime()
-    })
+    socket.emit('newMessage', generateMessage('Admin', 'Welcome to chattrbox!')
+        // from: 'Admin',
+        // text: 'welcome to chattrbox!',
+        // createdAt: new Date().getTime()
+    )
 
     //socket.broadcast.emit from Admin text New user joined chat!
-    socket.broadcast.emit('newMessage', {
-        from: 'Admin',
-        text: 'New user joined chat!',
-        createdAt: new Date().getTime()
-    })
+    socket.broadcast.emit('newMessage', generateMessage('Admin', 'New user just joined chat!')
+        // from: 'Admin',
+        // text: 'New user joined chat!',
+        // createdAt: new Date().getTime()
+    )
     socket.on('createMessage', (message) => {
         console.log('createMessage', message);
         io.emit('newMessage', {
