@@ -38,13 +38,10 @@ io.on('connection', (socket) => {
         // text: 'New user joined chat!',
         // createdAt: new Date().getTime()
     )
-    socket.on('createMessage', (message) => {
+    socket.on('createMessage', (message, callback) => {
         console.log('createMessage', message);
-        io.emit('newMessage', {
-            from: message.from,
-            text: message.text,
-            createdAt: new Date().getTime()
-        })
+        io.emit('newMessage', generateMessage(message.from, message.text));
+        callback('This is from the server!');
 
         // socket.broadcast.emit('newMessage', {
         //     from: message.from,
