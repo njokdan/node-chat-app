@@ -22,10 +22,20 @@ const io = socketIO(server);
 app.use(express.static(publicPath));
 //lets you register event listener
 io.on('connection', (socket) => {
-    console.log('New user just connected ...');
-    socket.on('disconnect', () => {
-        console.log('User disconnected ...');
+    console.log('New user connected ...');
+    socket.emit('newEmail', {
+        from: 'mike@example.com',
+        text: 'Hey! What is going on?',
+        createdAt: 123
+    });
+    socket.emit('createEmail', {
+        to: 'interglobalmedia@gmail.com',
+        text: 'Hey! This is Tom!'
     })
+    socket.on('createEmail', (newEmail) => {
+        console.log('createEmail', newEmail);
+    })
+
 });
 
 // use HTTP server instead of Express server beause of socket.io
