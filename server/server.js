@@ -23,17 +23,13 @@ app.use(express.static(publicPath));
 //lets you register event listener
 io.on('connection', (socket) => {
     console.log('New user connected ...');
-    socket.emit('newEmail', {
-        from: 'mike@example.com',
-        text: 'Hey! What is going on?',
-        createdAt: 123
+    socket.emit('newMessage', {
+        from: 'Nancy',
+        text: 'Sure!',
+        createdAt: 123123
     });
-    socket.emit('createEmail', {
-        to: 'interglobalmedia@gmail.com',
-        text: 'Hey! This is Tom!'
-    })
-    socket.on('createEmail', (newEmail) => {
-        console.log('createEmail', newEmail);
+    socket.on('createMessage', (message) => {
+        console.log('createMessage', message);
     })
 
 });
