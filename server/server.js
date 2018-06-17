@@ -23,13 +23,13 @@ app.use(express.static(publicPath));
 //lets you register event listener
 io.on('connection', (socket) => {
     console.log('New user connected ...');
-    socket.emit('newMessage', {
-        from: 'Nancy',
-        text: 'Sure!',
-        createdAt: 123123
-    });
     socket.on('createMessage', (message) => {
         console.log('createMessage', message);
+        io.emit('newMessage', {
+            from: message.from,
+            text: message.text,
+            createdAt: new Date().getTime()
+        })
     })
 
 });
