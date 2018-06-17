@@ -23,6 +23,20 @@ app.use(express.static(publicPath));
 //lets you register event listener
 io.on('connection', (socket) => {
     console.log('New user connected ...');
+
+    //socket.broadcast.emit from Admin text Welcome to chattrbox
+    socket.emit('newMessage', {
+        from: 'Admin',
+        text: 'welcome to chattrbox!',
+        createdAt: new Date().getTime()
+    })
+
+    //socket.broadcast.emit from Admin text New user joined chat!
+    socket.broadcast.emit('newMessage', {
+        from: 'Admin',
+        text: 'New user joined chat!',
+        createdAt: new Date().getTime()
+    })
     socket.on('createMessage', (message) => {
         console.log('createMessage', message);
         io.emit('newMessage', {
@@ -30,9 +44,21 @@ io.on('connection', (socket) => {
             text: message.text,
             createdAt: new Date().getTime()
         })
-    })
 
-});
+        // socket.broadcast.emit('newMessage', {
+        //     from: message.from,
+        //     text: message.text,
+        //     createdAt: new Date().getTime()
+        // })
+    })
+    socket.on('disconnect', function() {
+        console.log('Disconnected from server ...');
+    })
+})
+
+
+
+
 
 // use HTTP server instead of Express server beause of socket.io
 server.listen(port, () => {
