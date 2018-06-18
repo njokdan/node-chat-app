@@ -8,10 +8,13 @@ socket.on('disconnect', function() {
 });
 socket.on('newMessage', function(message) {
     var formattedTime = moment(message.createdAt).format('H:mm:ss a');
-    console.log('newMessage', message);
-    var li = jQuery('<li></li>');
-    li.html(`<span class="message-name">${message.from}</span> <span class="message-time">${formattedTime}:</span> ${message.text}`);
-    jQuery('#messages').append(li);
+    var template = jQuery('#message-template').html();
+    var html = Mustache.render(template, {
+        text: message.text,
+        from: message.from,
+        createdAt: formattedTime
+    });
+    jQuery('#messages').append(html);
 })
 
 jQuery('#message-form').on('submit', function(e) {
@@ -41,13 +44,14 @@ locationButton.on('click', function() {
             })
             // for creating location url
         socket.on('newLocationMessage', function(message) {
-            var formattedTime = moment(message.createdAt).format('H:mm:ss a')
-            var li = jQuery('<li></li>');
-            var a = jQuery(`<a class="current-location" target="_blank">My current location</a>`);
-            li.text(`${message.from} ${formattedTime}: `)
-            a.attr('href', message.url);
-            li.append(a);
-            jQuery('#messages').append(li);
+            var formattedTime = moment(message.createdAt).format('H:mm:ss a');
+            var template = jQuery('#location-message-template').html();
+            var html = Mustache.render(template, {
+                from: message.from,
+                url: message.url,
+                createdAt: formattedTime
+            })
+            jQuery('#messages').append(html)
         })
     }, function() {
         locationButton.removeAttr('disabled').text('Send location');
