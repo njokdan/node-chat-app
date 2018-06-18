@@ -18,6 +18,9 @@ h3 {
   text-align: center;
   font-size: 1.5rem; }
 
+a {
+  color: tomato; }
+
 button {
   border: none;
   background: darkorchid;
@@ -156,6 +159,10 @@ button:disabled {
 
 .message-name {
   color: tomato;
+  font-size: 1.1rem; }
+
+.message-time {
+  color: #6495ed;
   font-size: 1.1rem; }
 
 .message__title {

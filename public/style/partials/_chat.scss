@@ -167,6 +167,12 @@ button:disabled {
     font-size: 1.1rem;
 }
 
+// user timestamp styling
+.message-time {
+    color: $CornflowerBlue;
+    font-size: 1.1rem;
+}
+
 .message__title {
     display: flex;
     margin-bottom: 5px;

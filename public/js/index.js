@@ -7,9 +7,10 @@ socket.on('disconnect', function() {
     console.log('Disconnected from the server ...');
 });
 socket.on('newMessage', function(message) {
+    var formattedTime = moment(message.createdAt).format('H:mm:ss a');
     console.log('newMessage', message);
     var li = jQuery('<li></li>');
-    li.html(`<span class="message-name">${message.from}:</span> ${message.text}`);
+    li.html(`<span class="message-name">${message.from}</span> <span class="message-time">${formattedTime}:</span> ${message.text}`);
     jQuery('#messages').append(li);
 })
 
@@ -40,9 +41,10 @@ locationButton.on('click', function() {
             })
             // for creating location url
         socket.on('newLocationMessage', function(message) {
+            var formattedTime = moment(message.createdAt).format('H:mm:ss a')
             var li = jQuery('<li></li>');
-            var a = jQuery('<a target="_blank">My current location</a>');
-            li.text(`${message.from}: `);
+            var a = jQuery(`<a class="current-location" target="_blank">My current location</a>`);
+            li.text(`${message.from} ${formattedTime}: `)
             a.attr('href', message.url);
             li.append(a);
             jQuery('#messages').append(li);
