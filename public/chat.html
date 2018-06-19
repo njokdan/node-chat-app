@@ -14,15 +14,16 @@
 <body class="chat">
     <div class="chat__sidebar">
         <h3>People</h3>
-        <div id="user"></div>
+        <div id="users"></div>
     </div>
 
     <div class="chat__main">
         <h1>chattrbox</h1>
-        <ul id="messages" class="chat__messages">
-        </ul>
+        <ol id="messages" class="chat__messages">
+        </ol>
         <footer class="chat__footer">
             <form id="message-form">
+                <input type="text" name="name" placeholder="Name" autofocus autocomplete="off" />
                 <input type="text" name="message" placeholder="Message" autofocus autocomplete="off" />
                 <button>Send</button>
             </form>
@@ -57,6 +58,7 @@
     <script src="/js/libs/jquery-3.3.1.min.js"></script>
     <script src="/js/libs/moment.js"></script>
     <script src="/js/libs/mustache.js"></script>
+    <script src="/js/libs/deparam.js"></script>
     <script src="/js/chat.js"></script>
 </body>
 

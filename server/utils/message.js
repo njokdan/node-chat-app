@@ -4,14 +4,14 @@ const generateMessage = (from, text) => {
     return {
         from,
         text,
-        createdAt: moment().format()
+        createdAt: moment().valueOf()
     }
 }
 const generateLocationMessage = (from, latitude, longitude) => {
     return {
         from,
         url: `https://www.google.com/maps?q=${latitude},${longitude}`,
-        createdAt: moment().format()
+        createdAt: moment().valueOf()
     }
 }
 
