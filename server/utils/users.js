@@ -43,7 +43,9 @@ class Users {
             name,
             room
         };
+
         this.users.push(user);
+
         return user;
     }
 

@@ -5,7 +5,7 @@ const http = require('http');
 const express = require('express');
 const socketIO = require('socket.io');
 const { generateMessage, generateLocationMessage } = require('./utils/message');
-const { isRealString, forceLowerCase } = require('./utils/validation');
+const { isRealString } = require('./utils/validation');
 const { Users } = require('./utils/users');
 const port = process.env.PORT || 3000;
 const publicPath = path.join(__dirname, '../public/');
@@ -30,7 +30,6 @@ io.on('connection', (socket) => {
     console.log('New user connected ...');
 
     socket.on('join', (params, callback) => {
-        forceLowerCase(params.name, params.room);
         if (!isRealString(params.name) || !isRealString(params.room)) {
             // return so that join does not fire if user login data is not valid
             return callback('Proper name and room name format are required!');
@@ -47,7 +46,7 @@ io.on('connection', (socket) => {
         //socket.broadcast.emit from Admin text Welcome to chattrbox
         socket.emit('newMessage', generateMessage('Admin', 'Welcome to chattrbox!'));
         //socket.broadcast.emit from Admin text New user joined chat!
-        socket.broadcast.to(params.room).emit('newMessage', generateMessage('Admin', `${params.name} just joined the chat!`));
+        socket.broadcast.to(params.room).emit('newMessage', generateMessage('Admin', `${params.name} just joined the ${params.room} chat!`));
         callback();
     })
     socket.on('createMessage', (message, callback) => {
@@ -73,7 +72,7 @@ io.on('connection', (socket) => {
             // only when someone actually joins a room do we see a new message about joining. however, 
             // does not fix the welcome messge. That repeats with every refresh of the page.
             io.to(user.room).emit('updateUserList', users.getUserList(user.room));
-            io.to(user.room).emit('newMessage', generateMessage('Admin', `${user.name} has left the room!`));
+            io.to(user.room).emit('newMessage', generateMessage('Admin', `${user.name} has left the ${user.room} room!`));
         }
         console.log('Disconnected from server ...');
     })
