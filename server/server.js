@@ -50,11 +50,19 @@ io.on('connection', (socket) => {
         callback();
     })
     socket.on('createMessage', (message, callback) => {
-        io.emit('newMessage', generateMessage(message.from, message.text));
+        var user = users.getUser(socket.id);
+        // if uwer sends an empty message or just a bunch of empty spaces
+        // it won't get sent to everyone else.
+        if (user && isRealString(message.text)) {
+            io.to(user.room).emit('newMessage', generateMessage(user.name, message.text));
+        }
         callback();
     })
     socket.on('createLocationMessage', (coords) => {
-        io.emit('newLocationMessage', generateLocationMessage('Admin', `${coords.latitude}, ${coords.longitude}`));
+        var user = users.getUser(socket.id);
+        if (user) {
+            io.to(user.room).emit('newLocationMessage', generateLocationMessage(user.name, `${coords.latitude}, ${coords.longitude}`));
+        }
     })
 
     socket.on('disconnect', function() {

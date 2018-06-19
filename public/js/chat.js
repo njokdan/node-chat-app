@@ -56,16 +56,28 @@ socket.on('newMessage', function(message) {
     scrollToBottom();
 })
 
+// for creating location url
+socket.on('newLocationMessage', function(message) {
+    var formattedTime = moment(message.createdAt).format('H:mm:ss a');
+    var template = jQuery('#location-message-template').html();
+    var html = Mustache.render(template, {
+        from: message.from,
+        url: message.url,
+        createdAt: formattedTime
+    })
+    jQuery('#messages').append(html);
+    scrollToBottom();
+})
+
 jQuery('#message-form').on('submit', function(e) {
     e.preventDefault();
     var messageTextBox = jQuery('[name=message]');
-    var userName = jQuery('[name=name]');
     socket.emit('createMessage', {
-        from: userName.val(),
+        // just sending text across now because the name is
+        // being stored by server.js in socket.id
         text: messageTextBox.val()
     }, function() {
-        messageTextBox.val(''),
-            userName.val('')
+        messageTextBox.val('')
     })
 });
 
@@ -79,21 +91,10 @@ locationButton.on('click', function() {
         locationButton.removeAttr('disabled').text('Send location');
         // adding coords object in users position
         socket.emit('createLocationMessage', {
-                latitude: position.coords.latitude,
-                longitude: position.coords.longitude
-            })
-            // for creating location url
-        socket.on('newLocationMessage', function(message) {
-            var formattedTime = moment(message.createdAt).format('H:mm:ss a');
-            var template = jQuery('#location-message-template').html();
-            var html = Mustache.render(template, {
-                from: message.from,
-                url: message.url,
-                createdAt: formattedTime
-            })
-            jQuery('#messages').append(html);
-            scrollToBottom();
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
         })
+
     }, function() {
         locationButton.removeAttr('disabled').text('Send location');
         alert('Unable to fetch location');
