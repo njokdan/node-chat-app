@@ -25,6 +25,7 @@ var io = socketIO(server);
 // new instance of Users class
 var users = new Users();
 app.use(express.static(publicPath));
+
 //lets you register event listener
 io.on('connection', (socket) => {
     console.log('New user connected ...');
