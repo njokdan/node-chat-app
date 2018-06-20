@@ -84,7 +84,7 @@ jQuery('#message-form').on('submit', function(e) {
 var locationButton = jQuery('#send-location');
 locationButton.on('click', function() {
     if (!navigator.geolocation) {
-        return alert('Geolocation is not supported by your browser!');
+        return alert('geolocation is not supported by your browser!');
     }
     locationButton.attr('disabled', 'disabled').text('Sending location ...');
     navigator.geolocation.getCurrentPosition(function(position) {
@@ -97,6 +97,6 @@ locationButton.on('click', function() {
 
     }, function() {
         locationButton.removeAttr('disabled').text('Send location');
-        alert('Unable to fetch location');
+        alert('unable to fetch location');
     })
 })
