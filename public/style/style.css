@@ -103,7 +103,6 @@ button:disabled {
   padding: 10px;
   margin: 10px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  color: darkorchid;
   font-weight: bold; }
 
 .chat__main {
@@ -128,7 +127,6 @@ button:disabled {
   background: #e6eaee;
   display: flex;
   padding: 10px;
-  /*height: 60px;*/
   flex-shrink: 0;
   height: 60px; }
   .chat__footer button {
@@ -167,7 +165,7 @@ button:disabled {
   color: tomato; }
 
 .message-body p {
-  color: #006400;
+  color: #4169e1;
   font-size: 1.1rem; }
 
 .message__title span {
