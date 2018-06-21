@@ -126,7 +126,8 @@
     font-size: 1.1rem;
 }
 
-.message-body p {
+.message-body p,
+.message-body p a {
     color: $RoyalBlue;
     font-size: 1.1rem;
 }

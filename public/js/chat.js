@@ -1,4 +1,9 @@
-var socket = io();
+let URL;
+if (URL === 'https://glacial-hollows-17195.herokuapp.com/') {
+    var socket = io('https://glacial-hollows-17195.herokuapp.com/');
+} else {
+    socket = io('http://localhost:3000/');
+}
 
 // scroll to bottom every time add a new message
 // determines whether should scroll to bottom
@@ -88,15 +93,16 @@ locationButton.on('click', function() {
     }
     locationButton.attr('disabled', 'disabled').text('Sending location ...');
     navigator.geolocation.getCurrentPosition(function(position) {
-        locationButton.removeAttr('disabled').text('Send location');
-        // adding coords object in users position
-        socket.emit('createLocationMessage', {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude
+            console.log(position);
+            locationButton.removeAttr('disabled').text('Send location');
+            // adding coords object in users position
+            socket.emit('createLocationMessage', {
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude
+            })
+        },
+        function() {
+            locationButton.removeAttr('disabled').text('Send location');
+            alert('unable to fetch location');
         })
-
-    }, function() {
-        locationButton.removeAttr('disabled').text('Send location');
-        alert('unable to fetch location');
-    })
 })
