@@ -1,9 +1,4 @@
-let URL;
-if (URL === 'https://glacial-hollows-17195.herokuapp.com/') {
-    var socket = io('https://glacial-hollows-17195.herokuapp.com/');
-} else {
-    socket = io('http://localhost:3000/');
-}
+var socket = io();
 
 // scroll to bottom every time add a new message
 // determines whether should scroll to bottom
