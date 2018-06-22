@@ -1,13 +1,34 @@
-.faqs {
+.faqs,
+.about {
     background: $DarkOrchid;
     line-height: 1.7;
     color: $Gainsboro;
 }
 
 .faqs-content {
+    margin: 0 auto 60px;
+}
+
+.about-content {
+    margin: 0 auto;
+}
+
+.faqs-content,
+.about-content {
     width: 90%;
     max-width: 800px;
-    margin: 0 auto 60px;
+}
+
+.inner-about-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 20% auto 0;
+    width: 90%;
+    max-width: 800px;
+    p {
+        margin: 20px auto;
+    }
 }
 
 .faqs-title {
