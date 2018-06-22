@@ -206,6 +206,51 @@ button:disabled {
     margin-top: 10px;
     height: 50px;
     padding-top: 7px; } }
+ul {
+  display: flex;
+  display: block;
+  margin: 20px auto;
+  text-align: center; }
+  ul li {
+    display: inline-block;
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+    padding: 0 10px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4); }
+  ul a {
+    color: white;
+    font-size: 1.1rem; }
+
+.faqs {
+  background: darkorchid;
+  line-height: 1.7;
+  color: #dcdcdc; }
+
+.faqs-content {
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto 60px; }
+
+.faqs-title {
+  font-size: 1.5rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4); }
+
+.faqs-title:first-of-type {
+  margin-top: 60px; }
+
+.faqs-title,
+.faqs-list-item {
+  margin-bottom: 20px; }
+
+.faqs ol li {
+  font-size: 1.1rem; }
+  .faqs ol li a {
+    color: tomato;
+    font-size: 1.1rem; }
+
+code {
+  color: tomato; }
+
 footer {
   width: 100%;
   height: 50px; }

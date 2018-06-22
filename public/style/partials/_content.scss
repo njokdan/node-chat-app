@@ -1,0 +1,37 @@
+.faqs {
+    background: $DarkOrchid;
+    line-height: 1.7;
+    color: $Gainsboro;
+}
+
+.faqs-content {
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto 60px;
+}
+
+.faqs-title {
+    font-size: 1.5rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.faqs-title:first-of-type {
+    margin-top: 60px;
+}
+
+.faqs-title,
+.faqs-list-item {
+    margin-bottom: 20px;
+}
+
+.faqs ol li {
+    font-size: 1.1rem;
+    a {
+        color: $Tomato;
+        font-size: 1.1rem;
+    }
+}
+
+code {
+    color: $Tomato;
+}
