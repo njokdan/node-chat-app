@@ -349,7 +349,8 @@ footer p {
   height: 50px;
   border-radius: 10px; }
 
-.faqs .material-icons {
+.faqs .material-icons,
+.about .material-icons {
   font-size: 48px;
   color: darkorchid; }
 
