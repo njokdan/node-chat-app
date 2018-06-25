@@ -231,22 +231,24 @@ ul {
   margin: 0 auto 60px; }
 
 .about-content {
-  margin: 0 auto; }
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; }
 
 .faqs-content,
 .about-content {
-  width: 90%;
-  max-width: 800px; }
+  width: 90%; }
 
 .inner-about-content {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  margin: 20% auto 0;
-  width: 90%;
-  max-width: 800px; }
+  vertical-align: middle;
+  margin: 20% auto;
+  width: 100%; }
   .inner-about-content p {
-    margin: 20px auto; }
+    margin: 20px auto;
+    font-size: 1.1rem; }
 
 .faqs-title {
   font-size: 1.5rem;
