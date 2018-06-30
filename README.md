@@ -2,10 +2,6 @@
 
 ## Built with websockets library socket.io, Node.js, and Express
 
-I've wanted to create a chat application with `websockets/socket.io` for the longest time. My final project for **NYCDA** gave me the opportunity to create one. Since the course included learning **Node.js**, the project fit the bill!
-
-Development of this application doesn't stop here. I will continue to fine-tune it. Who knows what might come out of it? Only the **Shadow** knows, lol!
-
 ### What is it for?
                 
 + For friends, family, and/or colleagues to connect in real time and communicate with each other. Messages are **timestamped**. **chattrbox** also uses the
