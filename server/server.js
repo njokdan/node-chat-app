@@ -4,7 +4,7 @@ const path = require('path');
 const http = require('http');
 const express = require('express');
 const socketIO = require('socket.io');
-const { generateMessage, generateLocationMessage } = require('./utils/message');
+const { generateMessage, generateLocationMessage, typing } = require('./utils/message');
 const { isRealString } = require('./utils/validation');
 const { Users } = require('./utils/users');
 const port = process.env.PORT || 3000;
@@ -50,6 +50,10 @@ io.on('connection', (socket) => {
         socket.broadcast.to(params.room).emit('newMessage', generateMessage('admin', `${params.name} just joined the ${params.room} chat!`));
         callback();
     })
+    socket.on('typing', (data) => {
+        var user = users.getUser(socket.id);
+        socket.broadcast.to(user.room).emit('typing', data = `${user.name} is typing ...`);
+    })
     socket.on('createMessage', (message, callback) => {
         var user = users.getUser(socket.id);
         // if uwer sends an empty message or just a bunch of empty spaces
@@ -57,6 +61,7 @@ io.on('connection', (socket) => {
         if (user && isRealString(message.text)) {
             io.to(user.room).emit('newMessage', generateMessage(user.name, message.text));
         }
+
         callback();
     })
     socket.on('createLocationMessage', (coords) => {

@@ -31,12 +31,11 @@ socket.on('connect', function() {
         }
     });
 });
+
 socket.on('disconnect', function() {
     console.log('Disconnected from the server ...');
 });
-socket.on('disconnect', function() {
-    console.log('Disconnected from the server ...');
-});
+
 socket.on('updateUserList', function(users) {
     var ol = jQuery('<ol></ol>');
     users.forEach(function(user) {
@@ -44,6 +43,34 @@ socket.on('updateUserList', function(users) {
     })
     jQuery('#users').html(ol);
 })
+
+var timeout;
+var typing;
+
+// timeout function to indicate that typing has stopped
+function timeoutFunction() {
+    typing = false;
+    socket.emit('typing', false);
+}
+
+// keyup event listener 
+// while typing is true, keep typing message alive
+jQuery('[name=message]').keyup(function(data) {
+    console.log('Happening');
+    typing = true;
+    socket.emit('typing', data);
+    timeout = setTimeout(timeoutFunction, 50);
+})
+
+// custom (typing) event to let everyone in room know who is typing
+socket.on('typing', function(data) {
+    if (data) {
+        jQuery('ol#typing').html(data);
+    } else {
+        jQuery('ol#typing').html('');
+    }
+})
+
 socket.on('newMessage', function(message) {
     var formattedTime = moment(message.createdAt).format('H:mm:ss a');
     var template = jQuery('#message-template').html();
@@ -52,7 +79,9 @@ socket.on('newMessage', function(message) {
         from: message.from,
         createdAt: formattedTime
     });
+
     jQuery('#messages').append(html);
+    jQuery('ol#typing').html('');
     scrollToBottom();
 })
 
@@ -78,8 +107,17 @@ jQuery('#message-form').on('submit', function(e) {
         text: messageTextBox.val()
     }, function() {
         messageTextBox.val('')
+        jQuery('ol#typing').html('');
     })
 });
+// so that user cannot submit message using enter/return key
+jQuery(window).keydown(function(e) {
+    var key = e.keyCode || e.which;
+    if (key === 13) {
+        e.preventDefault();
+        return false;
+    }
+})
 
 var locationButton = jQuery('#send-location');
 locationButton.on('click', function() {

@@ -8,15 +8,18 @@ describe('Users', () => {
         users.users = [{
             id: '1',
             name: 'Maria',
-            room: 'Twitter Chat'
+            room: 'Twitter Chat',
+            data: 'is typing!'
         }, {
             id: '2',
             name: 'Joe',
-            room: 'Dev Chat'
+            room: 'Dev Chat',
+            data: 'is typing!'
         }, {
             id: '3',
             name: 'Pam',
-            room: 'Linkedin Chat'
+            room: 'Linkedin Chat',
+            data: 'is typing!'
         }]
     })
     it('should add a new user', () => {
@@ -24,9 +27,10 @@ describe('Users', () => {
         var user = {
             id: '123',
             name: 'Maria',
-            room: 'The Merlin Fans'
+            room: 'The Merlin Fans',
+            data: 'is typing!'
         }
-        var resUser = users.addUser(user.id, user.name, user.room);
+        var resUser = users.addUser(user.id, user.name, user.room, user.data);
         // first users refers to users vairable, and second to the users array
         expect(users.users).toEqual([user]);
     })
