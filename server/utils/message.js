@@ -15,4 +15,12 @@ const generateLocationMessage = (from, latitude, longitude) => {
     }
 }
 
-module.exports = { generateMessage, generateLocationMessage };
+const typing = (from, text) => {
+    return {
+        from,
+        text,
+        createdAt: moment().valueOf()
+    }
+}
+
+module.exports = { generateMessage, generateLocationMessage, typing };

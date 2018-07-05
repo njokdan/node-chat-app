@@ -99,6 +99,10 @@ h3 {
   color: darkorchid;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4); }
 
+#typing {
+  list-style-type: none;
+  padding-left: 25px; }
+
 .chat__messages {
   flex-grow: 1;
   overflow-y: scroll;
