@@ -30,7 +30,8 @@
 [{
     id: '/#125674wjs',
     name: 'Maria',
-    room: 'The Merlin Fans'
+    room: 'The Merlin Fans',
+    data: 'typing'
 }]
 
 class Users {
